@@ -13,8 +13,11 @@ public class Bullet : MonoBehaviour
     private GameObject player;
     [SerializeField] private PlayerStats playerStats;
 
+    private static LTDescr delay;
+
     private void Awake()
     {
+        LeanTween.init(800);
         player = GameObject.Find("Player");
         playerStats = player.GetComponent<PlayerStats>();
     }
@@ -26,23 +29,30 @@ public class Bullet : MonoBehaviour
             if (enemyTag != "Player")
             {
                 collision.GetComponent<Health>().ChangeHealth(damage + playerStats.DamageAdder);
-                //Debug.Log(damage + playerStats.DamageAdder);
+                LeanTween.cancel(delay.uniqueId);
                 Delete();
             }
             else
             {
                 collision.GetComponent<Health>().ChangeHealth(damage);
+                LeanTween.cancel(delay.uniqueId);
                 Delete();
             }
         }
         if (collision.tag == "Wall" || collision.tag == "Floor")
+        {
+            LeanTween.cancel(delay.uniqueId);
             Delete();
+        }
         return;
     }
 
     private void OnEnable()
     {
-        Invoke("Delete", (bulletTime+playerStats.RangeAdder));
+        delay = LeanTween.delayedCall(bulletTime + playerStats.RangeAdder, () =>
+        {
+            Delete();
+        });
     }
 
     private void Delete()

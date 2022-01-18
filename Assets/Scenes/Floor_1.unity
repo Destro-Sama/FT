@@ -1050,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &189250499
 Transform:
   m_ObjectHideFlags: 0
@@ -3547,6 +3547,9 @@ MonoBehaviour:
   - tag: BossBullet
     prefab: {fileID: 6517915704513313427, guid: f69b432afdbee4a4ea833f19e7a2cfd4, type: 3}
     size: 200
+  - tag: EnrageBullet
+    prefab: {fileID: 6517915704513313427, guid: d3020cde3fdbabe4b97dd69835646ecb, type: 3}
+    size: 250
 --- !u!4 &580532051
 Transform:
   m_ObjectHideFlags: 0
