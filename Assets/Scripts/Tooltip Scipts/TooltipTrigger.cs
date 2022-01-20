@@ -22,7 +22,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         delay = LeanTween.delayedCall(0.5f, () =>
         {
             TooltipSystem.Show(content, header);
-        });
+        }).setIgnoreTimeScale(true);
     }
 
     public void OnMouseExit()
@@ -36,6 +36,6 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         delay = LeanTween.delayedCall(0.5f, () =>
         {
             TooltipSystem.Show(content, header);
-        });
+        }).setIgnoreTimeScale(true);
     }
 }
