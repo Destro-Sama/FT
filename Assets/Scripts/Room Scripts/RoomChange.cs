@@ -10,11 +10,16 @@ public class RoomChange : MonoBehaviour
     public static Animator transition;
     private static List<GameObject> rooms;
 
+    public string Room_Type;
+    public PlayerStats playerStats;
+    public int roomCost;
+
     private void Start()
     {
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         transition = GameObject.Find("RoomLoader").transform.GetChild(0).GetComponent<Animator>();
         objectPooler = GameObject.Find("ObjectPool").GetComponent<ObjectPooler>();
-        rooms = GameObject.Find("RoomsList").GetComponent<RoomPicker>().GetList();
+        rooms = GameObject.Find("RoomsList").GetComponent<RoomPicker>().GetList(Room_Type);
         SpawnRoom();
     }
 
@@ -26,7 +31,8 @@ public class RoomChange : MonoBehaviour
         {
             connectedRoom = Instantiate(connectedRoom);
             connectedRoom.transform.position = new Vector3(0, 0, 0);
-            connectedRoom.transform.SetParent(transform.parent.parent);
+            if (Room_Type != "Item")
+                connectedRoom.transform.SetParent(transform.parent.parent);
             connectedRoom.SetActive(false);
             return;
         }
@@ -46,6 +52,13 @@ public class RoomChange : MonoBehaviour
 
         if (isEnabled)
         {
+            if (Room_Type == "Item")
+            {
+                if (playerStats.coins < roomCost)
+                    return;
+                playerStats.GiveCoins(-roomCost);
+                Destroy(gameObject, 2f);
+            }
             Time.timeScale = 0;
             transition.SetTrigger("Transition");
             int children = objectPooler.gameObject.transform.childCount;

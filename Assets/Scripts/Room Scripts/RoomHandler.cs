@@ -25,6 +25,12 @@ public class RoomHandler : MonoBehaviour
                 Transform itemPicker = gameObject.transform.parent.Find("ItemSpawner");
                 if (itemPicker != null)
                     itemPicker.GetComponent<ItemPicker>().RoomEnd();
+                Transform ItemRoomChange = gameObject.transform.parent.Find("ItemRoomChanger");
+                if (ItemRoomChange != null)
+                    ItemRoomChange.GetComponent<RoomChange>().RoomEnd();
+                Transform ItemBackRoom = gameObject.transform.parent.Find("ItemBackRoomChanger");
+                if (ItemBackRoom != null)
+                    ItemBackRoom.GetComponent<RoomChangerBack>().RoomEnd();
             }
         }
     }

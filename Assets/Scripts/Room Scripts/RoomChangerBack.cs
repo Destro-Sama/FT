@@ -18,7 +18,12 @@ public class RoomChangerBack : MonoBehaviour
 
     public void FindRoom()
     {
-        connectedRoom = transform.parent.parent.GetChild(transform.parent.GetSiblingIndex() - 1).gameObject;
+        if (transform.parent.gameObject.tag != "Item_Room")
+            connectedRoom = transform.parent.parent.GetChild(transform.parent.GetSiblingIndex() - 1).gameObject;
+        else
+        {
+            connectedRoom = GameObject.Find("Rooms").transform.GetChild(GameObject.Find("Rooms").transform.childCount-1).gameObject;
+        }
     }
 
     public void RoomEnd()

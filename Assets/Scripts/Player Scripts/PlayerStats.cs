@@ -12,6 +12,10 @@ public class PlayerStats : MonoBehaviour
     public float RangeAdder;
     public float coins;
 
+    public Coins coinUI;
+
+    public Dictionary<string, int> items = new Dictionary<string, int>();
+
     public void ChangeDamage(int damage)
     {
         DamageAdder += damage;
@@ -40,5 +44,16 @@ public class PlayerStats : MonoBehaviour
     public void GiveCoins(int change)
     {
         coins += change;
+        coinUI.UpdateCoins();
+    }
+
+    public void IncreaseItem(string name)
+    {
+        items[name] += 1;
+    }
+
+    public void NewItem(string name)
+    {
+        items[name] = 1;
     }
 }

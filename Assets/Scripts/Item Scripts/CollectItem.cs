@@ -24,7 +24,17 @@ public class CollectItem : MonoBehaviour
         if (collision.tag == "Player")
         { 
             Invoke(statToChange, 0.01f);
+            transform.position = new Vector3(100, 100, 1);
             Destroy(gameObject, 0.02f);
+            if (playerStats.items.ContainsKey(gameObject.name))
+            {
+                playerStats.IncreaseItem(gameObject.name);
+            }
+            else
+            {
+                playerStats.NewItem(gameObject.name);
+            }
+            Debug.Log($"{gameObject.name}: {playerStats.items[gameObject.name]}");
         }
     }
 
