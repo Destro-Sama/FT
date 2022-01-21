@@ -16,21 +16,24 @@ public class RoomHandler : MonoBehaviour
             {
                 isEnabled = true;
                 roomsCleared += 1;
-                Transform roomChange = gameObject.transform.parent.Find("RoomChanger");
+                RoomChange[] roomChange = gameObject.transform.parent.GetComponentsInChildren<RoomChange>();
                 if (roomChange != null)
-                    roomChange.GetComponent<RoomChange>().RoomEnd();
-                Transform backRoom = gameObject.transform.parent.Find("BackRoomChanger");
+                    foreach (var item in roomChange)
+                    {
+                        item.RoomEnd();
+                    }
+                RoomChangerBack[] backRoom = gameObject.transform.parent.GetComponentsInChildren<RoomChangerBack>();
                 if (backRoom != null)
-                    backRoom.GetComponent<RoomChangerBack>().RoomEnd();
-                Transform itemPicker = gameObject.transform.parent.Find("ItemSpawner");
+                    foreach (var item in backRoom)
+                    {
+                        item.RoomEnd();
+                    }
+                ItemPicker[] itemPicker = gameObject.transform.parent.GetComponentsInChildren<ItemPicker>();
                 if (itemPicker != null)
-                    itemPicker.GetComponent<ItemPicker>().RoomEnd();
-                Transform ItemRoomChange = gameObject.transform.parent.Find("ItemRoomChanger");
-                if (ItemRoomChange != null)
-                    ItemRoomChange.GetComponent<RoomChange>().RoomEnd();
-                Transform ItemBackRoom = gameObject.transform.parent.Find("ItemBackRoomChanger");
-                if (ItemBackRoom != null)
-                    ItemBackRoom.GetComponent<RoomChangerBack>().RoomEnd();
+                    foreach (var item in itemPicker)
+                    {
+                        item.RoomEnd();
+                    }
             }
         }
     }

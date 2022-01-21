@@ -22,6 +22,8 @@ public class ItemPicker : MonoBehaviour
             listIndex = 1;
         else if (type == "testing")
             listIndex = 2;
+        else if (type == "shop")
+            listIndex = 998;
         items = itemPool.GetList(listIndex);
         int index = Random.Range(0, items.Count);
         GameObject pick = items[index];

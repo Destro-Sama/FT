@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CollectItem : MonoBehaviour
 {
-    private GameObject player;
-    private PlayerStats playerStats;
-    private PlayerHealth healthScript;
-    private PlayerMovement playerMovement;
+    protected GameObject player;
+    protected PlayerStats playerStats;
+    protected PlayerHealth healthScript;
+    protected PlayerMovement playerMovement;
     public string statToChange;
     public int statChange;
 
-    private void Start()
+    protected void Start()
     {
         player = GameObject.Find("Player");
         playerStats = player.GetComponent<PlayerStats>();
@@ -19,7 +19,7 @@ public class CollectItem : MonoBehaviour
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         { 
