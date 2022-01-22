@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9498e6d21cb4b2c49ae60a5ce8a08e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 10
   health: 0
   coinMax: 6
   coinMin: 1
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 6666501195281791944}
   m_Layer: 0
   m_Name: FL1_1_1
-  m_TagString: Untagged
+  m_TagString: Battle_Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9498e6d21cb4b2c49ae60a5ce8a08e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 2
   health: 0
   coinMax: 2
   coinMin: 1

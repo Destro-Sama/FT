@@ -9,6 +9,15 @@ public class ShopItemCollection : CollectItem
 
     public int shopPrice;
 
+    public static bool nearby;
+    private bool thisNearby;
+
+    private SpriteRenderer image;
+
+    private void Awake()
+    {
+        image = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -16,15 +25,33 @@ public class ShopItemCollection : CollectItem
         pickUpCounter -= Time.deltaTime;
 
         Vector3 distanceToPlayer = player.transform.position - transform.position;
-        if (distanceToPlayer.magnitude <= pickUpRange && Input.GetButtonDown("Interact") && pickUpCounter <= 0 && playerStats.coins >= shopPrice)
+        if ( (distanceToPlayer.magnitude <= pickUpRange && nearby == false) || (distanceToPlayer.magnitude <= pickUpRange && thisNearby == true))
         {
-            pickUpCounter = 1f;
-            PickUp();
+            nearby = true;
+            thisNearby = true;
+            image.color = new Color(255, 0, 0);
+            if (Input.GetButtonDown("Interact") && pickUpCounter <= 0 && playerStats.coins >= shopPrice)
+            {
+                pickUpCounter = 1f;
+                PickUp();
+            }
+        }
+        else if (distanceToPlayer.magnitude <= pickUpRange && thisNearby == false)
+        {
+            image.color = new Color(255, 255, 255);
+        }
+        else if (distanceToPlayer.magnitude >= pickUpRange && thisNearby == true)
+        {
+            nearby = false;
+            thisNearby = false;
+            image.color = new Color(255, 255, 255);
         }
     }
 
     private void PickUp()
     {
+        nearby = false;
+        thisNearby = false;
         Invoke(statToChange, 0.01f);
         playerStats.GiveCoins(-shopPrice);
         transform.position = new Vector3(100, 100, 1);

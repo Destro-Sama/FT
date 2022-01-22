@@ -10,6 +10,9 @@ TagManager:
   - Floor
   - Wall
   - Item_Room
+  - Battle_Room
+  - Obstacle_Room
+  - Shop_Room
   layers:
   - Default
   - TransparentFX

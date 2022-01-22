@@ -18,6 +18,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void Start()
     {
+        Screen.SetResolution(1280, 1024, Screen.fullScreen);
         languages = new List<string>();
         languages.Add("Arabic");
         languages.Add("Chinese");

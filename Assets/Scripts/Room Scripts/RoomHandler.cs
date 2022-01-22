@@ -15,20 +15,21 @@ public class RoomHandler : MonoBehaviour
             if (childrenCheck == 0)
             {
                 isEnabled = true;
-                roomsCleared += 1;
-                RoomChange[] roomChange = gameObject.transform.parent.GetComponentsInChildren<RoomChange>();
+                if (transform.parent.tag == "Battle_Room")
+                    roomsCleared += 1;
+                RoomChange[] roomChange = transform.parent.GetComponentsInChildren<RoomChange>();
                 if (roomChange != null)
                     foreach (var item in roomChange)
                     {
                         item.RoomEnd();
                     }
-                RoomChangerBack[] backRoom = gameObject.transform.parent.GetComponentsInChildren<RoomChangerBack>();
+                RoomChangerBack[] backRoom = transform.parent.GetComponentsInChildren<RoomChangerBack>();
                 if (backRoom != null)
                     foreach (var item in backRoom)
                     {
                         item.RoomEnd();
                     }
-                ItemPicker[] itemPicker = gameObject.transform.parent.GetComponentsInChildren<ItemPicker>();
+                ItemPicker[] itemPicker = transform.parent.GetComponentsInChildren<ItemPicker>();
                 if (itemPicker != null)
                     foreach (var item in itemPicker)
                     {

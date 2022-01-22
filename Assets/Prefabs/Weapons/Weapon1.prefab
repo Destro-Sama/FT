@@ -204,7 +204,7 @@ MonoBehaviour:
   gunContainer: {fileID: 0}
   Cam: {fileID: 0}
   pickUpRange: 2
-  dropForwardForce: 1
+  dropForwardForce: 2
   dropUpwardForce: 1
   equipped: 1
 --- !u!114 &6656199874038236584

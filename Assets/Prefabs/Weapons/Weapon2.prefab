@@ -203,7 +203,7 @@ MonoBehaviour:
   player: {fileID: 0}
   gunContainer: {fileID: 0}
   Cam: {fileID: 0}
-  pickUpRange: 10
+  pickUpRange: 2
   dropForwardForce: 2
   dropUpwardForce: 1
   equipped: 0

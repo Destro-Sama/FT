@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
   rb: {fileID: 6517915704513313424}
-  damage: 1
+  damage: 2
   yourTag: Enemy
   enemyTag: Player
   bulletTime: 10

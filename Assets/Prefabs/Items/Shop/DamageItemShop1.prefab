@@ -156,5 +156,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statToChange: Damage
   statChange: 6
-  pickUpRange: 10
+  pickUpRange: 2
   shopPrice: 10

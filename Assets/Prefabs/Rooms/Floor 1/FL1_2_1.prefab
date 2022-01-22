@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 1563444117759518902}
   m_Layer: 0
   m_Name: FL1_2_1
-  m_TagString: Untagged
+  m_TagString: Battle_Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

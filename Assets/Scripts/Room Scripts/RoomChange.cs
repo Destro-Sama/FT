@@ -14,6 +14,9 @@ public class RoomChange : MonoBehaviour
     public PlayerStats playerStats;
     public int roomCost;
 
+    public static int itemRooms;
+    private int itemRoomsPerFloor = 2;
+
     private void Start()
     {
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
@@ -41,6 +44,12 @@ public class RoomChange : MonoBehaviour
 
     public void RoomEnd()
     {
+        if (Room_Type == "Item" && itemRooms >= itemRoomsPerFloor)
+        {
+            gameObject.SetActive(false);
+            itemRooms += 1;
+            return;
+        }
         isEnabled = true;
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
