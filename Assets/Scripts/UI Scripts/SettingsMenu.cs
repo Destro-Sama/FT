@@ -88,4 +88,9 @@ public class SettingsMenu : MonoBehaviour
         string language = languages[languageIndex];
         Lean.Localization.LeanLocalization.SetCurrentLanguageAll(language);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
