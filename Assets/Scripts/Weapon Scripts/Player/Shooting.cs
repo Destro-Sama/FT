@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    //SerializeField is a header that lets me edit private variables in the unity editor
     [SerializeField] private Transform firePoint;
 
     [SerializeField] private float bulletForce;
@@ -18,15 +19,20 @@ public class Shooting : MonoBehaviour
 
     private ObjectPooler objectPooler;
 
+    //Start is a unity function called at the start of the runtim
     private void Start()
     {
         objectPooler =  ObjectPooler.Instance;
+        //Finding the first object in a scene called "Player"
         player = GameObject.Find("Player");
+        //Getting the component of "PlayerStats"
         playerStats = player.GetComponent<PlayerStats>();
     }
 
+    //Update is a function called every frame by Unity
     private void Update()
     {
+        //Checks if the button labled "Fire1" is pressed. Can not be fired again until it is released
         if (Input.GetButtonDown("Fire1"))
         {
             bulletAdder = playerStats.ProjectileAdder;
@@ -36,6 +42,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
+    //Void is the return type of the function, void means no return
     private void Shoot()
     {
         if (bulletAmount+bulletAdder == 1)

@@ -9,6 +9,7 @@ public class Coins : MonoBehaviour
     public PlayerStats playerStats;
     private TMP_Text text;
 
+    //Start is a unity function that gets called at the start of runtime
     private void Start()
     {
         Image image = transform.parent.gameObject.GetComponent<Image>();
@@ -17,8 +18,10 @@ public class Coins : MonoBehaviour
         text = gameObject.GetComponent<TMP_Text>();
     }
 
+    //Void is the function return type, void means no return
     public void UpdateCoins()
     {
+        //$"{}" is text formatting in c#
         text.text = $"Coins: {playerStats.coins}";
     }
 }

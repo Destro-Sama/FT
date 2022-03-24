@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomPicker : MonoBehaviour
 {
+    //Creating a new empty List of GameObjects
     public List<GameObject> FL1_Rooms = new List<GameObject>();
     public List<GameObject> Item_Rooms = new List<GameObject>();
     public List<GameObject> bossRooms = new List<GameObject>();
@@ -11,12 +12,15 @@ public class RoomPicker : MonoBehaviour
     public RoomHandler roomHandler;
     private int roomsCleared;
 
+    //Update is a function called by unity every frame
     private void Update()
     {
+        //Finding the object called "RoomHandler" and getting the component on it
         roomHandler = GameObject.Find("RoomHandler").GetComponent<RoomHandler>();
         roomsCleared = roomHandler.GetRoomsCleared();
     }
 
+    //List<GameObject> is the return type of the function
     public List<GameObject> GetList(string Type)
     {
         if ((roomsCleared + 1) % 10 != 0)

@@ -13,11 +13,14 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionDropdown;
     public Dropdown languageDropdown;
 
+    //Resolution[] is a list of object types Resolution
     private Resolution[] resolutions;
     List<string> languages;
 
+    //Start is a unity function called at the start of runtime
     public void Start()
     {
+        //This code is just for multiple languages
         Screen.SetResolution(1280, 1024, Screen.fullScreen);
         languages = new List<string>();
         languages.Add("Arabic");
@@ -35,10 +38,12 @@ public class SettingsMenu : MonoBehaviour
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
+        //Creating a new empty list of strings
         List<string> options = new List<string>();
 
         int currentResolutionIndex = 0;
 
+        //for i starting at 0, increasing by 1 untill the length of the list of resolutions
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;

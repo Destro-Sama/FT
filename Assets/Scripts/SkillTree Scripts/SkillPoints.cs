@@ -11,6 +11,7 @@ public class SkillPoints : MonoBehaviour
 
     public int points;
 
+    //Start is a unity function called at the start of runtime
     private void Start()
     {
         points = 100;

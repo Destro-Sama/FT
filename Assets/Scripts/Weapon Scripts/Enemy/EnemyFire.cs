@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyFire : MonoBehaviour
 {
+    //SerializeField allows me to edit private variables in the Unity Editor
     [SerializeField] protected float shootCooldown;
     protected float shootTimer = 0;
     protected bool canShoot => shootTimer > shootCooldown;
@@ -17,11 +18,13 @@ public class EnemyFire : MonoBehaviour
 
     protected ObjectPooler objectPooler;
 
+    //Virtual allows me to inherit from this function
     protected virtual void Start()
     {
         objectPooler = ObjectPooler.Instance;
     }
 
+    //Void is the return type of the function, void means no return
     protected virtual void Update()
     {
         shootTimer += Time.deltaTime;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //SerializeField is a header that allows me to edit private variables in the Unity editor
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private Rigidbody2D rb;
     public float damage;
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
 
     private static LTDescr delay;
 
+    //Awake is a unity function that gets called when an object is initialised
     private void Awake()
     {
         LeanTween.init(800);
@@ -22,6 +24,7 @@ public class Bullet : MonoBehaviour
         playerStats = player.GetComponent<PlayerStats>();
     }
 
+    //OnTriggerEnter2D is a unity function called when 2 colliders touch
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == enemyTag)
@@ -47,6 +50,7 @@ public class Bullet : MonoBehaviour
         return;
     }
 
+    //A unity function called when the object is enabled
     private void OnEnable()
     {
         delay = LeanTween.delayedCall(bulletTime + playerStats.RangeAdder, () =>
@@ -62,6 +66,7 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
         rb.velocity = Vector2.zero;
         GameObject em = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        //Destroys an object after a set amount of time
         Destroy(em, 1.5f);
     }
 }

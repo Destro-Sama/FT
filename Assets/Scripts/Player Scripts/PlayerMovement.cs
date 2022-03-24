@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //GameObject is the variable type of physical objects on screen
     public GameObject SkillsCanvas;
     public GameObject SettingsCanvas;
 
+    //The Header "Header" allows me to group and name variables so it is easier to use in the unity editor
     [Header("Components")]
+    //Rigidbody2D is a componet that controls the physics behind mass and gravity
     private Rigidbody2D rb;
 
     [Header("Layer Masks")]
+    //SerializeField is a header that allows me to view and edit private variables in the unity editor
+    //LayerMask is the layer type of 2D objects, allows to group them
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask cornerCorrectLayer;
 
@@ -64,11 +69,15 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight;
     //private bool idle;
 
+    //Start is a function called by unity at the start of the runtime
+    //Void is the return type, void means no return
     private void Start()
     {
+        //Getting the Rigidbody2D component of the obejct
         rb = GetComponent<Rigidbody2D>();
     }
 
+    //Update is a function called by unity every frame
     private void Update()
     {
         horizontalDirection = GetInput().x;
@@ -87,13 +96,18 @@ public class PlayerMovement : MonoBehaviour
         {
             //idle = true;
         }
+        //GetButtonDown is called when the button labeled "Jump" and can not be called again until it is released
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBufferLength;
         }
+        //GetKeyDown is called when the keyCode "Q" is called and can not be called again until it is released
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            //SetActive allows me to control wether an object is interactable and visible or not
+            //The == true? false : true is a ternary operator. It checks a bool value against a statement, if true returns false, else return true.
             SkillsCanvas.SetActive(SkillsCanvas.activeInHierarchy == true ? false : true);
+            //timeScale is the physics runtime of unity, at 0 nothing is calculated or moves, and at 1 it runs at normal speed
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -128,11 +142,13 @@ public class PlayerMovement : MonoBehaviour
             dashBufferCounter -= Time.deltaTime;
     }
 
+    //FixedUpdate is a function called by unity every physics frame
     private void FixedUpdate()
     {
         CheckCollisions();
         if (canDash)
         {
+            //StartCoroutine Starts a Coroutine
             StartCoroutine(Dash(horizontalDirection, verticalDirection));
         }
         if (!isDashing)
@@ -163,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 GetInput()
     {
+        //GetAxisRaw allows me to get the input data (between -1 and 1) of the values horizontally and vertically
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
@@ -222,6 +239,14 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 1f;
     }
 
+    //This part is very hard to imagine
+    //Raycasts are invisible lines of light, that send information back if they touch something. They can do ALOT
+    //In this situation I am sending 2 rays out the player's feet, and 4 out the player's head
+    //The 2 at the feet check to see if you are standing on something solid, to know you are grounded
+    //The 4 at the head are split into 2 catagories.
+    //The 2 on the outside check to see if there is anything above you
+    //While the 2 on the inside check to see if you are too far out of an object
+    //This means I can check wether it is acceptable to correct corner collisions or not
     private void CheckCollisions()
     {
         onGround = Physics2D.Raycast(transform.position + groundRaycastOffset, Vector2.down, groundRaycastLength, groundLayer) ||
@@ -233,6 +258,9 @@ public class PlayerMovement : MonoBehaviour
             !Physics2D.Raycast(transform.position - innerRaycastOffset, Vector2.up, topRaycastLength, cornerCorrectLayer);
     }
 
+    //CornerCorrect works by checking the 4 head rays to see if you are in the correct position to be corner corrected
+    //If you are, then it will move you around the edge of an obstacle above you, while maintaining momentum,
+    //to make jumping near obstacles feel better and smoother
     private void CornerCorrect(float Yvelocty)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position - innerRaycastOffset + Vector3.up * topRaycastLength, Vector3.left, topRaycastLength, cornerCorrectLayer);
@@ -270,6 +298,8 @@ public class PlayerMovement : MonoBehaviour
         extraJumps += jumps;
     }
 
+    //IEnumerator is the type return of Coroutines
+    //Coroutines are functions that run alongside regular functions, and can avoid time changes and special systems
     private IEnumerator Dash(float x, float y)
     {
         float dashStartTime = Time.time;

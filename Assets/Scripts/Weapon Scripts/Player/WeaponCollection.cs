@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponCollection : MonoBehaviour
 {
+    //SerializeField is a header that allows me to edit private variables in the Unity Editor
     [SerializeField] private Shooting gunScript;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D coll;
@@ -19,8 +20,10 @@ public class WeaponCollection : MonoBehaviour
     public bool equipped;
     public static GameObject room;
 
+    //Start is a unity function called at the start of runtime
     private void Start()
     {
+        //Finding the first object in the scene called "Player"
         player = GameObject.Find("Player").transform;
         gunContainer = player.Find("WeaponSlot");
         Cam = GameObject.Find("Main Camera").transform;
@@ -42,6 +45,7 @@ public class WeaponCollection : MonoBehaviour
         }
     }
 
+    //Update is a unity function called every frame
     private void Update()
     {
 
@@ -57,12 +61,14 @@ public class WeaponCollection : MonoBehaviour
         }
     }
 
+    //Void is the return type of the function, void means no return
     private void PickUp()
     {
         equipped = true;
 
         room = transform.parent.gameObject;
 
+        //Setting the parent so we can access it's local values later
         transform.SetParent(gunContainer);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -71,6 +77,7 @@ public class WeaponCollection : MonoBehaviour
         rb.isKinematic = true;
         coll.isTrigger = true;
         rb.velocity = Vector2.zero;
+        //Setting the constraints of a Rigidbody2D
         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         gunScript.enabled = true;

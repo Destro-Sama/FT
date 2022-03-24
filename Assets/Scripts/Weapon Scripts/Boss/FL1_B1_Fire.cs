@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class FL1_B1_Fire : MonoBehaviour
 {
+    //This code is specialised for the first first-Floor boss
     private bool enraged;
     private Health bossHealth;
 
+    //SeraializeField is a header that makes private variables editable in the Unity energy
     [SerializeField] private float shootCooldown;
     [SerializeField] private float shootTimer = 0;
     private bool canShoot => shootTimer > shootCooldown;
@@ -27,12 +29,14 @@ public class FL1_B1_Fire : MonoBehaviour
     private string previousAttack;
     private bool attacking;
 
+    //Start is a function called by Unity at the start of the runtime
     private void Start()
     {
         objectPooler = ObjectPooler.Instance;
         bossHealth = gameObject.transform.parent.parent.GetComponent<Health>();
     }
 
+    //Update is a Unity function called every frame
     private void Update()
     {
         if (bossHealth.health <= (bossHealth.maxHealth / 2) && enraged == false)
@@ -51,6 +55,7 @@ public class FL1_B1_Fire : MonoBehaviour
         }
     }
 
+    //Void is the function return type, void means no return
     private void Enrage()
     {
         enrageBulletForce += 10;
@@ -78,6 +83,7 @@ public class FL1_B1_Fire : MonoBehaviour
                     attacking = true;
                     previousAttack = "shoot";
                     Shoot();
+                    //Invoke calls a function after a set time
                     Invoke("Shoot", 0.3f);
                     Invoke("Shoot", 0.6f);
                     Invoke("Shoot", 0.9f);
@@ -94,6 +100,7 @@ public class FL1_B1_Fire : MonoBehaviour
                 {
                     attacking = true;
                     previousAttack = "Attack1";
+                    //StartCoroutine starts a coroutine
                     StartCoroutine(StartAttack1());
                 }
             }
@@ -233,6 +240,8 @@ public class FL1_B1_Fire : MonoBehaviour
         }
     }
 
+    //IEnumerator is the return type of coroutines
+    //Coroutines are functions that get called alongside functions, and ignore time restraints
     private IEnumerator StartAttack1()
     {
         StartCoroutine(Attack1());

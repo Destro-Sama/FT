@@ -7,6 +7,7 @@ public class AIShootingRotation : MonoBehaviour
 {
     public AIPath aiPath;
 
+    //Update is a function called by Unity every frame
     private void Update()
     {
 
