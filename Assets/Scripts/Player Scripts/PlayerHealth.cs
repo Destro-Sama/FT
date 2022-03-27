@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //PlayerHealth Inherits from the Health class
 public class PlayerHealth : Health
@@ -66,11 +67,9 @@ public class PlayerHealth : Health
         yield return new WaitForSecondsRealtime(3f);
         deathScreen.SetTrigger("Lived");
         ChangeHealth(-maxHealth);
-        Debug.Log("You Live!!");
+        //LoadScene allows me to load sections of set objects, all at once
+        SceneManager.LoadScene(0);
         Time.timeScale = 1;
         UpdateUI();
-        //I haven't Done this part yet
-        //invoke room change on the same room, to set the player back to the starting positon of the room. Or invoke a room change on "Start" room. 
-        //Remove all items
     }
 }
